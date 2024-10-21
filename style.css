@@ -5,9 +5,76 @@ body {
     height: 100vh;
 }
 
+
 .card-container {
     display: grid;
     grid-template-columns: 1fr;
     justify-self: center;
 }
 
+form {
+    max-width: 400px;
+    margin: 20px 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+p, fieldset {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+input[type="text"], input[type="number"] {
+    width: calc(100% - 140px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+fieldset {
+    border: none;
+}
+
+legend {
+    font-weight: bold;
+}
+
+div {
+    margin-top: 5px;
+}
+
+menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button#cancel {
+    background-color: #f44336;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button#cancel:hover {
+    background-color: #d32f2f;
+}

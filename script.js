@@ -1,20 +1,15 @@
 const myLibrary = [];
 
-function Book(name) {
-    this.name = name;
+function Book(author, title, numPages, wasRead) {
+    this.author = author;
+    this.title = title;
+    this.numPages = numPages;
+    this.wasRead = wasRead;
 }
 
-function addBookToLibrary() {
-    let name = prompt("Enter book name:");
-    const book = new Book(name);
+function addBookToLibrary(book) {
     myLibrary.push(book);
 }
-
-/*
-    1. remove any existent cards
-    2. loop through book array, create card for each book and append it into container
-
-*/
 
 function displayBooks() {
 
@@ -31,8 +26,46 @@ function displayBooks() {
     for (const book of myLibrary) {
         const card = document.createElement("div");
         card.classList.add("card")
-        card.textContent = book.name;
+        card.textContent = book.title;
         container.appendChild(card);
     }
 }
 
+function checkDialog(isOpen) {
+    isOpen ? console.log("Dialog open") : console.log("Dialog closed");
+}
+
+function setDialog() {
+    const newBookButton = document.getElementById("new-book");
+    const cancelButton = document.getElementById("cancel");
+    const confirmButton = document.getElementById("confirm");
+    const dialog = document.getElementById("add-book");
+
+    newBookButton.addEventListener("click", () => {
+        dialog.show();
+        checkDialog(dialog.open);
+    })
+
+    cancelButton.addEventListener("click", () => {
+        dialog.close();
+        checkDialog(dialog.open);
+    });
+
+    confirmButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const author = document.getElementById('author').value;
+        const title = document.getElementById('title').value;
+        const numPages = document.getElementById('num-pages').value;
+        const wasRead = document.querySelector('input[name="was-read"]:checked').value;
+
+        const book = new Book(author, title, numPages, wasRead);
+        addBookToLibrary(book);
+        document.getElementById('book-form').reset();
+        dialog.close();
+        displayBooks();
+    })
+
+}
+
+setDialog()
