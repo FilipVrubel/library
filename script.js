@@ -1,10 +1,10 @@
 const myLibrary = [];
 
-function Book(author, title, numPages, wasRead) {
+function Book(author, title, numPages, read) {
     this.author = author;
     this.title = title;
-    this.numPages = numPages;
-    this.wasRead = wasRead;
+    this.numPages = numPages + " pages";
+    this.read = read;
 }
 
 function addBookToLibrary(book) {
@@ -24,9 +24,25 @@ function displayBooks() {
     }
     
     for (const book of myLibrary) {
+        const author = document.createElement("div");
+        const title = document.createElement("div");
+        const numPages = document.createElement("div");
+        const read = document.createElement("div");
+        
+        const items = [author, title, numPages, read];
+
+        author.textContent = book.author;
+        title.textContent = book.title;
+        numPages.textContent = book.numPages;
+        read.textContent = book.read;
+
         const card = document.createElement("div");
+
+        for (const item of items) {
+            card.appendChild(item)
+        }
+
         card.classList.add("card")
-        card.textContent = book.title;
         container.appendChild(card);
     }
 }
@@ -57,9 +73,13 @@ function setDialog() {
         const author = document.getElementById('author').value;
         const title = document.getElementById('title').value;
         const numPages = document.getElementById('num-pages').value;
-        const wasRead = document.querySelector('input[name="was-read"]:checked').value;
+        const readYesButtonChecked = document.getElementById("read-yes").checked; 
+        let read = "Read";
+        if (!readYesButtonChecked) {
+            read = "Not read";
+        }
 
-        const book = new Book(author, title, numPages, wasRead);
+        const book = new Book(author, title, numPages, read);
         addBookToLibrary(book);
         document.getElementById('book-form').reset();
         dialog.close();
