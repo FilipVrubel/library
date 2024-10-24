@@ -15,21 +15,23 @@ function displayBooks() {
 
     const container = document.querySelector(".card-container");
 
-    for (let i = 0; i < myLibrary.length; i++) {
-        const card = document.querySelector(".card");
-        
-        if (card != null) {
-            container.removeChild(card)
-        }
-    }
+    container.replaceChildren();
     
-    for (const book of myLibrary) {
+    for (const [index, book] of myLibrary.entries()) {
         const author = document.createElement("div");
         const title = document.createElement("div");
         const numPages = document.createElement("div");
         const read = document.createElement("div");
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.setAttribute("index", index);
         
-        const items = [author, title, numPages, read];
+        deleteButton.addEventListener("click", () => {
+            myLibrary.splice(deleteButton.getAttribute("index"), 1);
+            displayBooks();
+        });
+
+        const items = [author, title, numPages, read, deleteButton];
 
         author.textContent = book.author;
         title.textContent = book.title;
