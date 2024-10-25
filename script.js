@@ -7,9 +7,23 @@ function Book(author, title, numPages, read) {
     this.read = read;
 }
 
+Book.prototype.toggleReadStatus = function() {
+    switch(this.read) {
+        case "Read":
+            this.read = "Not read";
+            break;
+        case "Not read":
+            this.read = "Read";
+            break;
+    }
+
+    displayBooks()
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
+
 
 function displayBooks() {
 
@@ -22,7 +36,12 @@ function displayBooks() {
         const title = document.createElement("div");
         const numPages = document.createElement("div");
         const read = document.createElement("div");
+        const toggleReadButton = document.createElement("button")
         const deleteButton = document.createElement("button");
+    
+        toggleReadButton.textContent = "Toggle read status";
+        toggleReadButton.addEventListener("click", () => book.toggleReadStatus());
+
         deleteButton.textContent = "Delete";
         deleteButton.setAttribute("index", index);
         
@@ -31,7 +50,7 @@ function displayBooks() {
             displayBooks();
         });
 
-        const items = [author, title, numPages, read, deleteButton];
+        const items = [author, title, numPages, read, toggleReadButton, deleteButton];
 
         author.textContent = book.author;
         title.textContent = book.title;
